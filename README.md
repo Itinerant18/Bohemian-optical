@@ -6,7 +6,7 @@ Bohemian Optical is a virtual eyewear try-on platform that allows users to explo
 
 ## 🚀 Features
 
-- 🕶️ **Virtual Try-On** for 100+ designer eyewear models
+- 🕶️ **Virtual Try-On** for designer eyewear models
 - 🛍️ **Product Catalog** with filtering options
 - 📅 **Appointment Booking System**
 - 📞 **Contact Section** with location & support details
