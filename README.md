@@ -19,8 +19,8 @@ Bohemian Optical is a virtual eyewear try-on platform that allows users to explo
 - **Version Control**: Git & GitHub
 
 ## 📷 Screenshots
+![Uploading Screenshot (5).png…]()
 
-![Homepage Screenshot](https://your-image-url.com)
 
 ## 🌐 Live Demo
 
