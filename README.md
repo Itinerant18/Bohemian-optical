@@ -14,7 +14,7 @@ Bohemian Optical is a virtual eyewear try-on platform that allows users to explo
 
 ## 🛠️ Technologies Used
 
-- **Frontend**: HTML, CSS (TailwindCSS), JavaScript
+- **Frontend**: HTML, CSS (TailwindCSS), JavaScript, react, next
 - **Deployment**: Netlify
 - **Version Control**: Git & GitHub
 
