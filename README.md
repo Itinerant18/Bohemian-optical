@@ -1,7 +1,5 @@
 # Bohemian Optical
 
-![Bohemian Optical](https://your-image-url.com)
-
 Bohemian Optical is a virtual eyewear try-on platform that allows users to explore and try on premium glasses online before making a purchase. The website is designed to provide a seamless shopping experience with easy navigation, a stylish UI, and integrated appointment booking.
 
 ## 🚀 Features
