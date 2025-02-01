@@ -6,6 +6,7 @@ interface Product {
   name: string
   imageUrl: string
   tryOnLink?: string
+  price: number
 }
 
 interface ProductGridProps {
@@ -27,6 +28,7 @@ export function ProductGrid({ currentPage, products }: ProductGridProps) {
           name={product.name}
           imageUrl={product.imageUrl}
           tryOnLink={product.tryOnLink}
+          price={product.price}
         />
       ))}
     </div>
