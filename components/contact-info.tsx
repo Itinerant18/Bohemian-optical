@@ -19,7 +19,7 @@ export function ContactInfo() {
                 </div>
                 <div className="flex items-center">
                   <MapPin className="w-6 h-6 mr-2 text-[#D4A373]" />
-                  <p>Kandi, Murshidabad, WB, 742161</p>
+                  <p>Kandi, Murshidabad, WB, 742137</p>
                 </div>
               </div>
               <div className="h-[300px] md:h-[400px] rounded-lg overflow-hidden">
@@ -38,7 +38,7 @@ export function ContactInfo() {
         </div>
       </div>
       <div className="text-center py-4 bg-[#E9EDC9] text-[#4A4A4A]">
-        <p className="text-sm">Itinerant / @its_</p>
+        <p className="text-sm">@its_bohemian_</p>
       </div>
     </div>
   )
