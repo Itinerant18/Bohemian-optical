@@ -4,20 +4,28 @@ import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Modal } from "./modal"
-import { Camera } from "lucide-react"
+import { Camera, IndianRupee } from "lucide-react"
+import { PaymentModal } from "./payment-modal"
 
 interface ProductCardProps {
   name: string
   imageUrl: string
   tryOnLink?: string
+  price: number
 }
 
 export function ProductCard({
   name,
   imageUrl,
   tryOnLink = "https://ar.vervear.com/glasses/675f91cf6a00d6990d91f08e",
+  price,
 }: ProductCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false)
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(price)
+  }
 
   return (
     <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-4">
@@ -27,13 +35,26 @@ export function ProductCard({
       <h3 className="font-montserrat text-[14px] font-medium text-center mb-3 min-h-[48px] line-clamp-2 text-[#515151]">
         {name}
       </h3>
-      <Button
-        className="w-full bg-[#aa70a7] hover:bg-[#aa70a7]/90 text-white text-sm h-auto md:h-10 py-3 md:py-2 flex items-center justify-center gap-2"
-        onClick={() => setIsModalOpen(true)}
-      >
-        <Camera className="w-4 h-4" />
-        TRY-ON
-      </Button>
+      <p className="text-center text-[#aa70a7] font-semibold mb-3 flex items-center justify-center">
+        <IndianRupee className="w-4 h-4 mr-1" />
+        {formatPrice(price)}
+      </p>
+      <div className="flex flex-col gap-2">
+        <Button
+          className="w-full bg-[#aa70a7] hover:bg-[#aa70a7]/90 text-white text-sm h-auto md:h-10 py-3 md:py-2 flex items-center justify-center gap-2"
+          onClick={() => setIsModalOpen(true)}
+        >
+          <Camera className="w-4 h-4" />
+          TRY-ON
+        </Button>
+        <Button
+          className="w-full bg-[#D4A373] hover:bg-[#D4A373]/90 text-white text-sm h-auto md:h-10 py-3 md:py-2 flex items-center justify-center gap-2"
+          onClick={() => setIsPaymentModalOpen(true)}
+        >
+          <IndianRupee className="w-4 h-4" />
+          BUY NOW
+        </Button>
+      </div>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           {tryOnLink ? (
@@ -44,6 +65,14 @@ export function ProductCard({
             </div>
           )}
         </Modal>
+      )}
+      {isPaymentModalOpen && (
+        <PaymentModal
+          isOpen={isPaymentModalOpen}
+          onClose={() => setIsPaymentModalOpen(false)}
+          productName={name}
+          price={price}
+        />
       )}
     </div>
   )
