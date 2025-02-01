@@ -24,7 +24,11 @@ export function ProductCard({
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false)
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(price)
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0,
+    }).format(price)
   }
 
   return (
@@ -35,10 +39,7 @@ export function ProductCard({
       <h3 className="font-montserrat text-[14px] font-medium text-center mb-3 min-h-[48px] line-clamp-2 text-[#515151]">
         {name}
       </h3>
-      <p className="text-center text-[#aa70a7] font-semibold mb-3 flex items-center justify-center">
-        <IndianRupee className="w-4 h-4 mr-1" />
-        {formatPrice(price)}
-      </p>
+      <p className="text-center text-[#aa70a7] font-semibold mb-3">{formatPrice(price)}</p>
       <div className="flex flex-col gap-2">
         <Button
           className="w-full bg-[#aa70a7] hover:bg-[#aa70a7]/90 text-white text-sm h-auto md:h-10 py-3 md:py-2 flex items-center justify-center gap-2"
