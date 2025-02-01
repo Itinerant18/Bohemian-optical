@@ -40,10 +40,10 @@ export function ContactInfo() {
       <div className="text-center py-4 bg-[#E9EDC9] text-[#4A4A4A]">
         <p className="text-sm">Created by Itinerant</p>
         <div className="flex justify-center space-x-4">
-          <a href="https://www.instagram.com/your_instagram_profile" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.instagram.com/its_bohemian_?igsh=cTFsZGx2bmNjcTZh" target="_blank" rel="noopener noreferrer">
             <Instagram className="w-6 h-6 text-[#D4A373]" />
           </a>
-          <a href="https://github.com/your_github_profile" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/Itinerant18" target="_blank" rel="noopener noreferrer">
             <GitHub className="w-6 h-6 text-[#D4A373]" />
           </a>
         </div>
