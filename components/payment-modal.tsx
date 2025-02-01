@@ -4,20 +4,23 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { IndianRupee } from "lucide-react"
 
 interface PaymentModalProps {
   isOpen: boolean
   onClose: () => void
-  productName: string
-  price: number
+  total: number
+  userDetails: any
 }
 
-export function PaymentModal({ isOpen, onClose, productName, price }: PaymentModalProps) {
+export function PaymentModal({ isOpen, onClose, total, userDetails }: PaymentModalProps) {
   const [paymentMethod, setPaymentMethod] = useState("card")
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(price)
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0,
+    }).format(price)
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -35,11 +38,15 @@ export function PaymentModal({ isOpen, onClose, productName, price }: PaymentMod
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <h3 className="font-semibold mb-2">{productName}</h3>
-            <p className="text-lg font-bold text-[#aa70a7] flex items-center">
-              <IndianRupee className="w-5 h-5 mr-1" />
-              {formatPrice(price)}
-            </p>
+            <h3 className="font-semibold mb-2">Order Summary</h3>
+            <p className="text-lg font-bold text-[#aa70a7] flex items-center">Total: {formatPrice(total)}</p>
+          </div>
+          <div>
+            <h3 className="font-semibold mb-2">Delivery Details</h3>
+            <p>{userDetails.name}</p>
+            <p>{userDetails.email}</p>
+            <p>{userDetails.phone}</p>
+            <p>{userDetails.address}</p>
           </div>
           <div className="space-y-4">
             <Label>Payment Method</Label>
@@ -95,7 +102,7 @@ export function PaymentModal({ isOpen, onClose, productName, price }: PaymentMod
             </div>
           )}
           <Button type="submit" className="w-full bg-[#D4A373] hover:bg-[#D4A373]/90 text-white">
-            Pay {formatPrice(price)}
+            Pay {formatPrice(total)}
           </Button>
         </form>
       </DialogContent>
