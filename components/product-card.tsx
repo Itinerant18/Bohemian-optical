@@ -4,10 +4,11 @@ import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Modal } from "./modal"
-import { Camera, IndianRupee } from "lucide-react"
-import { PaymentModal } from "./payment-modal"
+import { Camera, ShoppingCart } from "lucide-react"
+import { useCart } from "@/contexts/CartContext"
 
 interface ProductCardProps {
+  id: string
   name: string
   imageUrl: string
   tryOnLink?: string
@@ -15,13 +16,14 @@ interface ProductCardProps {
 }
 
 export function ProductCard({
+  id,
   name,
   imageUrl,
   tryOnLink = "https://ar.vervear.com/glasses/675f91cf6a00d6990d91f08e",
   price,
 }: ProductCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false)
+  const { addToCart } = useCart()
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("en-IN", {
@@ -29,6 +31,10 @@ export function ProductCard({
       currency: "INR",
       maximumFractionDigits: 0,
     }).format(price)
+  }
+
+  const handleAddToCart = () => {
+    addToCart({ id, name, price, quantity: 1 })
   }
 
   return (
@@ -50,10 +56,10 @@ export function ProductCard({
         </Button>
         <Button
           className="w-full bg-[#D4A373] hover:bg-[#D4A373]/90 text-white text-sm h-auto md:h-10 py-3 md:py-2 flex items-center justify-center gap-2"
-          onClick={() => setIsPaymentModalOpen(true)}
+          onClick={handleAddToCart}
         >
-          <IndianRupee className="w-4 h-4" />
-          BUY NOW
+          <ShoppingCart className="w-4 h-4" />
+          ADD TO CART
         </Button>
       </div>
       {isModalOpen && (
@@ -66,14 +72,6 @@ export function ProductCard({
             </div>
           )}
         </Modal>
-      )}
-      {isPaymentModalOpen && (
-        <PaymentModal
-          isOpen={isPaymentModalOpen}
-          onClose={() => setIsPaymentModalOpen(false)}
-          productName={name}
-          price={price}
-        />
       )}
     </div>
   )
