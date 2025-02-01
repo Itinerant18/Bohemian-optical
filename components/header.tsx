@@ -2,12 +2,14 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { Menu, Phone } from "lucide-react"
+import { Menu, Phone, ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { BookingModal } from "./booking-modal"
+import { useCart } from "@/contexts/CartContext"
+import Link from "next/link"
 
 interface HeaderProps {
   selectedBrand: string
@@ -19,11 +21,14 @@ interface HeaderProps {
 export function Header({ selectedBrand, onBrandChange, isOpen, setIsOpen }: HeaderProps) {
   const [isBookingOpen, setIsBookingOpen] = useState(false)
   const brands = ["All", "Gucci", "Saint Laurent", "Fendi", "Cazal"]
+  const { cart } = useCart()
 
   const handleBrandSelect = (brand: string) => {
     onBrandChange(brand === "All" ? "" : brand)
     setIsOpen(false)
   }
+
+  const cartItemsCount = cart.reduce((total, item) => total + item.quantity, 0)
 
   return (
     <header className="border-b border-[#E9EDC9] bg-[#FEFAE0]">
@@ -46,6 +51,16 @@ export function Header({ selectedBrand, onBrandChange, isOpen, setIsOpen }: Head
             <Button className="bg-[#D4A373] hover:bg-[#D4A373]/90 text-white" onClick={() => setIsBookingOpen(true)}>
               Book Appointment
             </Button>
+            <Link href="/cart">
+              <Button variant="outline" className="relative">
+                <ShoppingCart className="h-5 w-5" />
+                {cartItemsCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                    {cartItemsCount}
+                  </span>
+                )}
+              </Button>
+            </Link>
           </div>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
@@ -72,6 +87,17 @@ export function Header({ selectedBrand, onBrandChange, isOpen, setIsOpen }: Head
                   >
                     Book Appointment
                   </Button>
+                  <Link href="/cart">
+                    <Button variant="outline" className="w-full relative">
+                      <ShoppingCart className="h-5 w-5 mr-2" />
+                      Cart
+                      {cartItemsCount > 0 && (
+                        <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                          {cartItemsCount}
+                        </span>
+                      )}
+                    </Button>
+                  </Link>
                 </div>
                 <div>
                   <h3 className="mb-4 text-lg font-medium">Filter by Brand</h3>
