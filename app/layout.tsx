@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Outfit, Playfair_Display, Montserrat } from "next/font/google"
 import "./globals.css"
+import { CartProvider } from "@/contexts/CartContext"
 import type React from "react" // Import React
 
 const outfit = Outfit({
@@ -33,7 +34,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} ${playfair.variable} ${montserrat.variable} font-sans`}>{children}</body>
+      <body className={`${outfit.variable} ${playfair.variable} ${montserrat.variable} font-sans`}>
+        <CartProvider>{children}</CartProvider>
+      </body>
     </html>
   )
 }
